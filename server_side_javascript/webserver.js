@@ -13,6 +13,7 @@ const http = require('http');
 const hostname = '127.0.0.1';
 const port = 3333;
 
+// 첫번째 방법 - 축약형
 const server = http.createServer((req, res) => {	
 	// createServer라는 함수를 통해 서버를 만든다.
   res.statusCode = 200;
