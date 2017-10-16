@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Dev-JeromeBaek/Node-js#readme",
   "dependencies": {
+    "express": "^4.16.2",
     "underscore": "^1.8.3"
   }
 }
