@@ -1,10 +1,18 @@
 var express = require('express');
 var app = express();
 
+// 정적인 파일이 위치할 디렉터리를 지정하는 기능.
+app.use(express.static('public'));
+// public : 디렉터리명.
+
 // get, post 방식의 호출에 대한 함수
 // get, post 함수에 대한 콜백함수에는 request와 response가 반환된다.
 app.get('/', function(req, res) {
 	res.send('Hello Home Page!');
+});
+
+app.get('/route', function(req, res) {
+	res.send('Hello Router, <img src="/ex01.jpg">')
 });
 
 // get, post함수를 'router'라고 한다. route : 길을 찾는다.
