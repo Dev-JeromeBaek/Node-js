@@ -13,6 +13,30 @@ app.get('/', function(req, res) {
 	res.send('Hello Home Page!');
 });
 
+app.get('/dynamic', function(req, res) {
+	var time = Date();
+	var lis = '';
+	for(var i=0; i<5; i++) {
+		lis = lis + '<li>repeat Message'+i+'</li>';
+	}
+	var output = `
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>static</title>
+	</head>
+	<body>
+		<h1>Hello, Dynamic</h1>
+		<h2>New Message!</h2>
+
+		${lis}
+
+		${time}
+	</body>
+	</html>`;
+	res.send(output);
+});
+
 app.get('/route', function(req, res) {
 	res.send('Hello Router, <img src="/ex01.jpg">')
 });
