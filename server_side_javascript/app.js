@@ -3,6 +3,8 @@
 var express = require('express');
 var app = express();
 
+app.locals.pretty = true;
+
 // 템플릿 엔진을 설정한다.
 // 여기서 'view engine'은 템플릿 엔진을 의미함. ( 약속된 사항 )
 app.set('view engine', 'jade');
@@ -19,10 +21,11 @@ app.use(express.static('public'));
 // public : 디렉터리명.
 
 app.get('/template', function(req, res) {
-	res.render(temp);	// express가 템플릿을 렌더링한다.
-	//	'/template' 이라는 경로를 통해서 들어온 
-	//	클라이언트에게 해당 함수를 실행기켜 주면서 
-	//	temp라는 템플릿 파일을 웹페이지로 렌더링 해서 전달한다. 라는 의미.
+	res.render('temp', {time:Date()});	
+	// express가 템플릿을 렌더링한다.
+	// '/template' 이라는 경로를 통해서 들어온 
+	// 클라이언트에게 해당 함수를 실행tl켜 주면서 
+	// temp라는 템플릿 파일을 웹페이지로 렌더링 해서 전달한다는 의미.
 });
 
 // get, post 방식의 호출에 대한 함수
