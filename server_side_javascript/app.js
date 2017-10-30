@@ -21,7 +21,7 @@ app.use(express.static('public'));
 // public : 디렉터리명.
 
 app.get('/template', function(req, res) {
-	res.render('temp', {time:Date()});	
+	res.render('temp', {time:Date(), _title:'Node_Jerome'});	
 	// express가 템플릿을 렌더링한다.
 	// '/template' 이라는 경로를 통해서 들어온 
 	// 클라이언트에게 해당 함수를 실행tl켜 주면서 
