@@ -20,11 +20,16 @@ app.set('views', './views');
 app.use(express.static('public'));
 // public : 디렉터리명.
 
+// 쿼리스트링 이용하기.
+app.get('/topic', function(req, res) {
+	res.send(req.query.id+','+req.query.name);
+});
+
 app.get('/template', function(req, res) {
 	res.render('temp', {time:Date(), _title:'Node_Jerome'});	
 	// express가 템플릿을 렌더링한다.
 	// '/template' 이라는 경로를 통해서 들어온 
-	// 클라이언트에게 해당 함수를 실행tl켜 주면서 
+	// 클라이언트에게 해당 함수를 실행시켜 주면서 
 	// temp라는 템플릿 파일을 웹페이지로 렌더링 해서 전달한다는 의미.
 });
 
@@ -59,7 +64,7 @@ app.get('/dynamic', function(req, res) {
 });
 
 app.get('/route', function(req, res) {
-	res.send('Hello Router, <img src="/ex01.jpg">')
+	res.send('Hello Router, <img src="/ex01.jpg">');
 });
 
 // get, post함수를 'router'라고 한다. route : 길을 찾는다.
