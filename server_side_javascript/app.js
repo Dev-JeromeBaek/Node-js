@@ -23,6 +23,9 @@ app.use(express.static('public'));
 // 쿼리스트링 이용하기.
 app.get('/topic', function(req, res) {
 	res.send(req.query.id+','+req.query.name);
+	// url상에 전달된 GET방식의 정보 값을 확인하여 출력.
+	// /topic?id=1 -> req.query.id
+	// /topic?name=Jerome -> req.query.name
 });
 
 app.get('/template', function(req, res) {
