@@ -22,7 +22,27 @@ app.use(express.static('public'));
 
 // 쿼리스트링 이용하기.
 app.get('/topic', function(req, res) {
-	res.send(req.query.id+','+req.query.name);
+
+	// querystring을 통해서 다른 정보가 들어왔다면 
+	// 해당 정보를 담아놓을 수 있는 공간을 만들어 놓아야한다.
+	var topics = [
+		'Javascript is...',
+		'Nodejs is...',
+		'Express is...'
+	];
+
+	// res.send(topics[req.query.id]);
+	// 보통 위 처럼 만들지 않고 링크를 달아준다.
+	
+	var output = `
+		<a href="/topic?id=0">JavaScript</a><br>
+		<a href="/topic?id=1">Node</a><br>
+		<a href="/topic?id=2">Express</a><br><br>
+		${topics[req.query.id]}
+	`
+	res.send(output);
+
+	// res.send(req.query.id);
 	// url상에 전달된 GET방식의 정보 값을 확인하여 출력.
 	// /topic?id=1 -> req.query.id
 	// /topic?name=Jerome -> req.query.name
