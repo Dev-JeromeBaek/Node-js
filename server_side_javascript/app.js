@@ -1,6 +1,7 @@
 // express 사용하기
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.locals.pretty = true;
@@ -20,8 +21,30 @@ app.set('views', './views');
 app.use(express.static('public'));
 // public : 디렉터리명.
 
+
+app.use(bodyParser.urlencoded({ extended: false}));
+
+// form을 이용한 정보 전달.
+app.get('/form', function(req, res) {
+	res.render('form');
+});
+
+app.get('/form_receiver', function(req, res) {
+	res.send('Hello, GET');
+	// var title = req.query.title;
+	// var description = req.query.description;
+	// res.send(title + ', ' + description);
+});
+
+app.post('/form_receiver', function(req, res) {
+	// res.send('Hello, POST');
+	var title = req.body.title;
+	var description = req.body.description;
+	res.send(title + ', ' + description);
+});
+
 // 쿼리스트링 이용하기.
-app.get('/topic', function(req, res) {
+app.get('/topic/:id', function(req, res) {
 
 	// querystring을 통해서 다른 정보가 들어왔다면 
 	// 해당 정보를 담아놓을 수 있는 공간을 만들어 놓아야한다.
@@ -38,7 +61,7 @@ app.get('/topic', function(req, res) {
 		<a href="/topic?id=0">JavaScript</a><br>
 		<a href="/topic?id=1">Node</a><br>
 		<a href="/topic?id=2">Express</a><br><br>
-		${topics[req.query.id]}
+		${topics[req.params.id]}
 	`
 	res.send(output);
 
@@ -46,6 +69,10 @@ app.get('/topic', function(req, res) {
 	// url상에 전달된 GET방식의 정보 값을 확인하여 출력.
 	// /topic?id=1 -> req.query.id
 	// /topic?name=Jerome -> req.query.name
+});
+
+app.get('/topic/:id/:mode', function(req, res) {
+	res.send(req.params.id + ', ' + req.params.mode);
 });
 
 app.get('/template', function(req, res) {
