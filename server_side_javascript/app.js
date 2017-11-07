@@ -2,6 +2,9 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+// npm을 통해 프로젝트에 포함시킨 body-parser라는 모듈을 
+// 가져와서 bodyParser 변수에 저장시킨다.
+
 var app = express();
 
 app.locals.pretty = true;
@@ -33,17 +36,22 @@ app.get('/form_receiver', function(req, res) {
 	res.send('Hello, GET');
 	// var title = req.query.title;
 	// var description = req.query.description;
-	// res.send(title + ', ' + description);
+	// res.send(title + ', ' + description); 
 });
 
+// post방식으로 전송하기
 app.post('/form_receiver', function(req, res) {
 	// res.send('Hello, POST');
 	var title = req.body.title;
 	var description = req.body.description;
 	res.send(title + ', ' + description);
+	// post 방식에는 request의 query객체가 아닌 body 객체를 사용한다.
+	// 하지만 request의 body 객체를 사용하기 위해선 body-parser 라는 미들웨어를
+	// 추가로 설치해 주어야 한다.
+
 });
 
-// 쿼리스트링 이용하기.
+// 쿼리스트링 이용하기. 
 app.get('/topic/:id', function(req, res) {
 
 	// querystring을 통해서 다른 정보가 들어왔다면 
@@ -56,7 +64,7 @@ app.get('/topic/:id', function(req, res) {
 
 	// res.send(topics[req.query.id]);
 	// 보통 위 처럼 만들지 않고 링크를 달아준다.
-	
+	  
 	var output = `
 		<a href="/topic?id=0">JavaScript</a><br>
 		<a href="/topic?id=1">Node</a><br>
