@@ -1,35 +1,39 @@
 // express 사용하기
 
 var express = require('express');
-var bodyParser = require('body-parser');
+
 // npm을 통해 프로젝트에 포함시킨 body-parser라는 모듈을 
 // 가져와서 bodyParser 변수에 저장시킨다.
-
+var bodyParser = require('body-parser');
 var app = express();
 
 app.locals.pretty = true;
 
 // 템플릿 엔진을 설정한다.
 // 여기서 'view engine'은 템플릿 엔진을 의미함. ( 약속된 사항 )
-app.set('view engine', 'jade');
 // 템플릿 엔진으로 jade라는 모듈을 사용하겠다는 의미.
 // 설치한 jade 모듈과 express를 연결하는 코드.
+app.set('view engine', 'jade');
 
 // 템플릿 파일들을 관리할 기본 디렉터리로 views 디렉터리를 지정한다.
-app.set('views', './views');
 // 위 코드를 생략하더라도 express는 기본적으로 
 // 기본값으로 설정해 놓고있지만 확실히 명시해주는 것이 좋음.
+app.set('views', './views');
 
 // 정적인 파일이 위치할 디렉터리를 지정하는 기능.
-app.use(express.static('public'));
 // public : 디렉터리명.
+app.use(express.static('public'));
 
-
+// bodyParser라는 모듈을 애필리케이션 객체에 붙이는 역할을 하는 명령.
 app.use(bodyParser.urlencoded({ extended: false}));
 
 // form을 이용한 정보 전달.
 app.get('/form', function(req, res) {
 	res.render('form');
+});
+
+app.get('/test', function(req, res) {
+	res.send('Test Supervisor');
 });
 
 app.get('/form_receiver', function(req, res) {
