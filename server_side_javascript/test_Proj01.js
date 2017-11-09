@@ -28,13 +28,64 @@ app.set('view engine', 'jade');
 
 app.get('/topic/new', function(req, res) {
 	// res.send('Route Test');
-	res.render('new');
+	fs.readdir('data_file', function(err, files) {
+		if(err) {
+			console.log(err);
+			res.status(500).send('Internal Server Error');
+		}
+		res.render('new', {topics:files});
+	});
 });
 
 
-app.get('/topic', function(req, res) {
-	res.render('view');
+app.get(['/topic','/topic/:id'], function(req, res) {
+	fs.readdir('data_file', function(err, files) {
+		if(err) {
+			console.log(err);
+			res.status(500).send('Internal Server Error');
+		}
+		var id = req.params.id;
+		if(id) {
+			// id값이 있을 때
+			fs.readFile('data_file/'+id, 'utf-8', function(err, data) {
+				// 'data_file'디렉터리 안에 파일을 경로로 잡아줌.
+				// 'utf-8' 해당 페이지의 인코딩 설정
+				// callback함수 (에러, 전달받은 data)
+				if(err) {
+					console.log(err);
+					res.status(500).send('Internal Server Error');
+				}
+				res.render('view', {topics:files, title:id, description:data});
+			});
+		} else {
+			// id값이 없을 때
+			res.render('view', {topics:files, title:'Welcome', description:'Hello, JavaScript for Server'});
+			// 가져온 files라는 배열을 topics라는 변수로 사용한다.
+		}
+	});
+	// 'data_file'디렉터리 안의 파일들을 가져오는 작업.
+	// 가져온 파일들의 목록은 'files'라는 배열로 저장이 됨.
+
 });
+// app.get('/topic/:id', function(req, res) {
+// 	var id = req.params.id;
+// 	fs.readdir('data_file', function(err, files) {
+// 		if(err) {
+// 			console.log(err);
+// 			res.status(500).send('Internal Server Error');
+// 		}
+// 		fs.readFile('data_file/'+id, 'utf-8', function(err, data) {
+// 			// 'data_file'디렉터리 안에 파일을 경로로 잡아줌.
+// 			// 'utf-8' 해당 페이지의 인코딩 설정
+// 			// callback함수 (에러, 전달받은 data)
+// 			if(err) {
+// 				console.log(err);
+// 				res.status(500).send('Internal Server Error');
+// 			}
+// 			res.render('view', {topics:files, title:id, description:data});
+// 		});
+// 	});
+// });
 app.post('/topic', function(req, res) {
 	// res.send('Router POST test');
 
@@ -48,8 +99,8 @@ app.post('/topic', function(req, res) {
 			// 에러 메시지를 Internal Server Error로 전달한다.
 			// send()가 실행되면 다음 코드는 실행되지 않는다.
 		}
-		res.send('Success');
-		
+		// res.send('Success');
+		res.redirect('/topic/'+title);
 	});
 	// fs.writeFile() 메소드 설정.
 	// fs.writeFile(file, data[, options], callback)
