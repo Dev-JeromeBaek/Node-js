@@ -1,4 +1,5 @@
 var OrientDB = require('orientjs');
+// Orinetjs 모듈을 사용하기위한 require();
 
 var server = OrientDB({
 	host: 'localhost',
@@ -6,20 +7,25 @@ var server = OrientDB({
 	username: 'root',
 	password: '0123'
 });
+// Jerome_Core
+// var db = server.use('orient_test1');
+// Jerome
+var db = server.use('orinet_test_Jerome');
 
-var db = server.use('orient_test1');
 
-var sql = "INSERT INTO topic (title, description) VALUES(:title, :desc)";
+var sql = "INSERT INTO topic (title, description, author) VALUES(:title, :desc, :auth)";
 // var param = {
 // 	params:{
 // 		title:'Express',
-// 		desc:'Express is framework for web'
+// 		desc:'Express is framework for web',
+//		auth:'Jerome'
 // 	}
 // }
 db.query(sql, {
 	params:{
 		title:'Express',
-		desc:'Express is framework for web'
+		desc:'Express is framework for web',
+		auth:'Jerome'
 	}
 }).then(function(results) {
 	console.log(results);
