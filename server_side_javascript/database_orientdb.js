@@ -12,25 +12,6 @@ var server = OrientDB({
 // Jerome
 var db = server.use('orinet_test_Jerome');
 
-
-var sql = "INSERT INTO topic (title, description, author) VALUES(:title, :desc, :auth)";
-// var param = {
-// 	params:{
-// 		title:'Express',
-// 		desc:'Express is framework for web',
-//		auth:'Jerome'
-// 	}
-// }
-db.query(sql, {
-	params:{
-		title:'Express',
-		desc:'Express is framework for web',
-		auth:'Jerome'
-	}
-}).then(function(results) {
-	console.log(results);
-});
-
 /*
 db.record.get('#19:0').then(function (record) {
 	console.log('Loaded record:', record.title);
@@ -65,4 +46,41 @@ db.query(sql, param).then(function(results) {
 });
 */
 
+// INSERT
+/*
+var sql = "INSERT INTO topic (title, description, author) VALUES(:title, :desc, :auth)";
+// var param = {
+// 	params:{
+// 		title:'Express',
+// 		desc:'Express is framework for web',
+//		auth:'Jerome'
+// 	}
+// }
+db.query(sql, {
+	params:{
+		title:'Express',
+		desc:'Express is framework for web',
+		auth:'Jerome'
+	}
+}).then(function(results) {
+	console.log(results);
+});
+*/
 
+// UPDATE
+/*
+var sql = "UPDATE topic SET title=:title WHERE @rid=:rid";
+
+db.query(sql, {params:{title:'Expressjs',rid:'#20:0'}}).then(function(results) {
+	console.log(results);
+});
+*/
+
+// DELETE
+/*
+var sql = "DELETE FROM topic WHERE @rid=:rid";
+
+db.query(sql, {params:{rid:'#20:0'}}).then(function(results) {
+	console.log(results);
+});
+*/
