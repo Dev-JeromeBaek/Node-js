@@ -70,7 +70,6 @@ db.query(sql, {
 // UPDATE
 /*
 var sql = "UPDATE topic SET title=:title WHERE @rid=:rid";
-
 db.query(sql, {params:{title:'Expressjs',rid:'#20:0'}}).then(function(results) {
 	console.log(results);
 });
@@ -79,7 +78,6 @@ db.query(sql, {params:{title:'Expressjs',rid:'#20:0'}}).then(function(results) {
 // DELETE
 /*
 var sql = "DELETE FROM topic WHERE @rid=:rid";
-
 db.query(sql, {params:{rid:'#20:0'}}).then(function(results) {
 	console.log(results);
 });
